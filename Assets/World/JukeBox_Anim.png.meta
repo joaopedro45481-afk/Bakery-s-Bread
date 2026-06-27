@@ -1,0 +1,423 @@
+fileFormatVersion: 2
+guid: c3d0ba80edbdd8f438cd89a0a7404518
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7239425646956172387
+    second: JukeBox_Anim_0
+  - first:
+      213: -4074260798589422922
+    second: JukeBox_Anim_1
+  - first:
+      213: 4405506035224734989
+    second: JukeBox_Anim_2
+  - first:
+      213: -8863356392640952973
+    second: JukeBox_Anim_3
+  - first:
+      213: 3217776040594572274
+    second: JukeBox_Anim_4
+  - first:
+      213: 2616154298816740593
+    second: JukeBox_Anim_5
+  - first:
+      213: -5033271273847542460
+    second: JukeBox_Anim_6
+  - first:
+      213: 1660172556608051606
+    second: JukeBox_Anim_7
+  - first:
+      213: 5794633478735459565
+    second: JukeBox_Anim_8
+  - first:
+      213: -6935697631161883741
+    second: JukeBox_Anim_9
+  - first:
+      213: -8972835548433939076
+    second: JukeBox_Anim_10
+  - first:
+      213: 7644869930491521023
+    second: JukeBox_Anim_11
+  - first:
+      213: -6115277292638645582
+    second: JukeBox_Anim_12
+  - first:
+      213: 8496963310628622000
+    second: JukeBox_Anim_13
+  - first:
+      213: 7111257867382211791
+    second: JukeBox_Anim_14
+  - first:
+      213: -565859477101445463
+    second: JukeBox_Anim_15
+  - first:
+      213: 8925545364815565999
+    second: JukeBox_Anim_16
+  - first:
+      213: 1617394365246808477
+    second: JukeBox_Anim_17
+  - first:
+      213: 4196471419931422233
+    second: JukeBox_Anim_18
+  - first:
+      213: -6003263821903693458
+    second: JukeBox_Anim_19
+  - first:
+      213: -686003655839057
+    second: JukeBox_Anim_20
+  - first:
+      213: 3174607908923730897
+    second: JukeBox_Anim_21
+  - first:
+      213: 5808265690875411951
+    second: JukeBox_Anim_22
+  - first:
+      213: -3407154303135946144
+    second: JukeBox_Anim_23
+  - first:
+      213: 3937089286976649469
+    second: JukeBox_Anim_24
+  - first:
+      213: -6651066320481177795
+    second: JukeBox_Anim_25
+  - first:
+      213: -1997279161281298902
+    second: JukeBox_Anim_26
+  - first:
+      213: 8614875096222923241
+    second: JukeBox_Anim_27
+  - first:
+      213: -327835645986374460
+    second: JukeBox_Anim_28
+  - first:
+      213: -9013428413170779041
+    second: JukeBox_Anim_29
+  - first:
+      213: 2553438163067425492
+    second: JukeBox_Anim_30
+  - first:
+      213: 5639159150178085807
+    second: JukeBox_Anim_31
+  - first:
+      213: 4581215129868185533
+    second: JukeBox_Anim_32
+  - first:
+      213: -6693358847327456379
+    second: JukeBox_Anim_33
+  - first:
+      213: -4845948241748221130
+    second: JukeBox_Anim_34
+  - first:
+      213: -4131855534955567984
+    second: JukeBox_Anim_35
+  - first:
+      213: 7888531723844448039
+    second: JukeBox_Anim_36
+  - first:
+      213: 748746159916934423
+    second: JukeBox_Anim_37
+  - first:
+      213: -5446954213056263303
+    second: JukeBox_Anim_38
+  - first:
+      213: 1582880169889837481
+    second: JukeBox_Anim_39
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: JukeBox_Anim_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9b235feab4688b90800000000000000
+      internalID: -7239425646956172387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b237c9d3615577c0800000000000000
+      internalID: -4074260798589422922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0de86dc560832d30800000000000000
+      internalID: 4405506035224734989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 375c2fa22580ff480800000000000000
+      internalID: -8863356392640952973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f3076aa246d7ac20800000000000000
+      internalID: 3217776040594572274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fc359a49727e4420800000000000000
+      internalID: 2616154298816740593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44da320a17a362ab0800000000000000
+      internalID: -5033271273847542460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JukeBox_Anim_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 699997ee42e1a0710800000000000000
+      internalID: 1660172556608051606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c45a64ccf988aad429f730900a61ddc2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      JukeBox_Anim_0: -7239425646956172387
+      JukeBox_Anim_1: -4074260798589422922
+      JukeBox_Anim_2: 4405506035224734989
+      JukeBox_Anim_3: -8863356392640952973
+      JukeBox_Anim_4: 3217776040594572274
+      JukeBox_Anim_5: 2616154298816740593
+      JukeBox_Anim_6: -5033271273847542460
+      JukeBox_Anim_7: 1660172556608051606
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
