@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6642162582664008503
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8887042083628412131, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: npcID
+      value: Albert
+      objectReference: {fileID: 0}
+    - target: {fileID: -8887042083628412131, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: npcName
+      value: Albert
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117729134368396075, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: npc
+      value: 
+      objectReference: {fileID: 4513878894925405975}
+    - target: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_Name
+      value: Garcia
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5647967466795936044, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6b4ae8822e1fb0242b9df4a82b54827a, type: 2}
+    - target: {fileID: 7585779615365478240, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7585779615365478240, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208691500759270333, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6274323472287221088, guid: 4e4d20145f8184444b4b025bc448f46a, type: 3}
+    - target: {fileID: 8208691500759270333, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208691500759270333, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8208691500759270333, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1685984115302509387, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4513878894925405975}
+    - targetCorrespondingSourceObject: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2132821416857015132}
+  m_SourcePrefab: {fileID: 100100000, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+--- !u!1 &8745801950882958855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+  m_PrefabInstance: {fileID: 6642162582664008503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4513878894925405975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745801950882958855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00b93731d63e554297a0baa5cf8e136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCController
+  entranceWaypoints: []
+  exitWaypoints: []
+  speed: 2
+  waypointThreshold: 0.05
+  useDirectionalAnimations: 1
+  currentState: 0
+--- !u!114 &2132821416857015132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745801950882958855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b00b93731d63e554297a0baa5cf8e136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCController
+  entranceWaypoints: []
+  exitWaypoints: []
+  speed: 2
+  waypointThreshold: 0.05
+  useDirectionalAnimations: 1
+  currentState: 0

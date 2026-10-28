@@ -14,6 +14,6 @@ public class JukeboxAnimator : MonoBehaviour
 
         animator.SetBool("IsPlaying", tocando);
 
-        Debug.Log("isPlaying = " + tocando);
+        
     }
 }
