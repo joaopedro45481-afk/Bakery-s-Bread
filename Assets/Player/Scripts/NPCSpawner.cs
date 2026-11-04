@@ -7,9 +7,6 @@ public class NPCSpawner : MonoBehaviour
 
     public List<GameObject> npcPrefabs = new List<GameObject>();
 
-    public Transform[] entranceWaypoints;
-    public Transform[] exitWaypoints;
-
     [Header("Tempo de Spawn")]
     public float tempoMinimo = 8f;
     public float tempoMaximo = 20f;
@@ -48,7 +45,7 @@ public class NPCSpawner : MonoBehaviour
     {
         GameObject prefab = EscolherNPC();
 
-        if(prefab == null)
+        if (prefab == null)
         {
             Debug.Log("Todos os NPCs disponíveis já estão na loja.");
             return;
@@ -58,15 +55,12 @@ public class NPCSpawner : MonoBehaviour
 
         NPCController controller = npc.GetComponent<NPCController>();
 
-        if(controller == null)
+        if (controller == null)
         {
             Debug.LogError(prefab.name + " não possui NPCController!");
             Destroy(npc);
             return;
         }
-
-        controller.entranceWaypoints = entranceWaypoints;
-        controller.exitWaypoints = exitWaypoints;
 
         npcsAtivos.Add(npc);
 
@@ -77,11 +71,11 @@ public class NPCSpawner : MonoBehaviour
     {
         List<GameObject> disponiveis = new List<GameObject>();
 
-        foreach(GameObject prefab in npcPrefabs)
+        foreach (GameObject prefab in npcPrefabs)
         {
             NPCData prefabData = prefab.GetComponent<NPCData>();
 
-            if(prefabData == null)
+            if (prefabData == null)
             {
                 Debug.LogWarning(prefab.name + " não possui NPCData!");
                 continue;
@@ -89,28 +83,27 @@ public class NPCSpawner : MonoBehaviour
 
             bool existe = false;
 
-            foreach(GameObject npc in npcsAtivos)
+            foreach (GameObject npc in npcsAtivos)
             {
-                if(npc == null)
+                if (npc == null)
                     continue;
 
                 NPCData npcData = npc.GetComponent<NPCData>();
 
-                if(npcData != null &&
-                   npcData.npcID == prefabData.npcID)
+                if (npcData != null && npcData.npcID == prefabData.npcID)
                 {
                     existe = true;
                     break;
                 }
             }
 
-            if(!existe)
+            if (!existe)
             {
                 disponiveis.Add(prefab);
             }
         }
 
-        if(disponiveis.Count == 0)
+        if (disponiveis.Count == 0)
             return null;
 
         return disponiveis[Random.Range(0, disponiveis.Count)];

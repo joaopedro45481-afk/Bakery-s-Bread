@@ -13,6 +13,9 @@ public class PlayerMove : MonoBehaviour
     private Collider2D playerCollider;
     public int moedas = 0;
 
+    // --- NOVA VARIÁVEL AQUI ---
+    [HideInInspector] public bool podeAndar = true; 
+
     private List<Collider2D> moveisProximos = new List<Collider2D>();
 
     void Start()
@@ -25,16 +28,27 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        // Se não pode andar, zera a velocidade e para a animação
+        if (!podeAndar)
+        {
+            rb.linearVelocity = Vector2.zero;
+            animator.SetBool("IsWalking", false);
+            return;
+        }
+
         rb.linearVelocity = moveInput * moveSpeed;
     }
 
     void LateUpdate()
     {
+        if (!podeAndar) return; // Não atualiza profundidade se estiver travado
         AtualizarProfundidade();
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+        if (!podeAndar) return; // Ignora comandos de teclado se estiver travado
+
         animator.SetBool("IsWalking", true);
         if (context.canceled)
         {
@@ -84,7 +98,6 @@ public class PlayerMove : MonoBehaviour
             Collider2D movelFisico = GetColliderFisico(movelTrigger.gameObject);
             if (movelFisico == null) continue;
 
-            // Ignora móveis que o player não está horizontalmente alinhado
             if (playerPos.x < movelFisico.bounds.min.x - margemX ||
                 playerPos.x > movelFisico.bounds.max.x + margemX)
             {
@@ -100,7 +113,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        if (maisProximoTrigger == null) return; // mantém o último valor, como combinamos
+        if (maisProximoTrigger == null) return;
 
         SpriteRenderer movelRenderer = maisProximoTrigger.GetComponent<SpriteRenderer>();
         if (movelRenderer == null) return;
@@ -110,7 +123,6 @@ public class PlayerMove : MonoBehaviour
 
         if (estaAtras)
         {
-            // Só passa pra FRENTE se ultrapassar a margem de baixo
             if (playerPos.y < centroMovel - margemHisterese)
             {
                 spriteRenderer.sortingOrder = movelRenderer.sortingOrder + 1;
@@ -118,7 +130,6 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            // Só passa pra TRÁS se ultrapassar a margem de cima
             if (playerPos.y > centroMovel + margemHisterese)
             {
                 spriteRenderer.sortingOrder = movelRenderer.sortingOrder - 1;

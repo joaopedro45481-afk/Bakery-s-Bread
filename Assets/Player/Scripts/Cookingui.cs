@@ -1,24 +1,11 @@
 using UnityEngine;
+using Unity.Cinemachine; // <-- Namespace correto para Unity 6
 
-/// <summary>
-/// Painel que abre quando o jogador interage com a mesa. É quem CRIA o
-/// CookingTaskController (ele nasce aqui, não existe antes disso) e quem
-/// finalmente entrega o item pro inventário quando a task termina.
-///
-/// Ajusta a assinatura de AdicionarItemAoInventario pro que o teu
-/// Inventory já expõe (ex: Inventory.Instance.AddItem(itemResultante)).
-///
-/// Onde encaixa:
-/// - InteractableTable chama AbrirTela(receita) quando o jogador interage.
-/// - Cria o DoughInteraction ativo passando o controller (Iniciar()).
-/// - Assina controller.OnTaskConcluida pra chamar o inventário e fechar a tela.
-/// - Assina controller.OnEstadoMudou se quiser trocar textos/telas conforme o progresso.
-/// </summary>
 public class CookingUI : MonoBehaviour
 {
     [SerializeField] private GameObject painelCozinha;
     [SerializeField] private DoughInteraction doughInteraction;
-    [SerializeField] private Stove fogaoDaCena; // referência ao Stove que essa mesa usa
+    [SerializeField] private Stove fogaoDaCena;
     [SerializeField] private InventoryController inventoryController;
     [SerializeField] private ItemDictionary itemDictionary;
 
@@ -29,6 +16,8 @@ public class CookingUI : MonoBehaviour
         painelCozinha.SetActive(true);
         doughInteraction.gameObject.SetActive(true);
 
+        SoltarCamera(); // <-- Chama a nova lógica
+
         controllerAtivo = new CookingTaskController(receita);
         controllerAtivo.OnTaskConcluida += OnTaskConcluida;
         controllerAtivo.OnEstadoMudou += OnEstadoMudou;
@@ -38,9 +27,6 @@ public class CookingUI : MonoBehaviour
 
     private void OnEstadoMudou(CookingTaskController.EstadoTask novoEstado)
     {
-        // aqui é o lugar pra trocar texto/instrução na tela conforme a etapa
-        // ex: "Abra a massa", "Sove a massa", "Leve ao fogão", "Cozinhando..."
-
         if (novoEstado == CookingTaskController.EstadoTask.LevandoAoFogao)
         {
             EnviarParaFogaoEFecharTela();
@@ -64,17 +50,12 @@ public class CookingUI : MonoBehaviour
         FecharTela();
     }
 
-    /// <summary>
-    /// Massa terminou de ser moldada: fecha a tela e guarda a task no
-    /// fogão, sem tocar em controllerAtivo (a task continua viva —
-    /// ainda vamos precisar do evento OnTaskConcluida dela mais tarde,
-    /// quando o jogador for lá cozinhar de verdade).
-    /// </summary>
     private void EnviarParaFogaoEFecharTela()
     {
         fogaoDaCena.GuardarMassaPendente(controllerAtivo, controllerAtivo.Receita);
         painelCozinha.SetActive(false);
         doughInteraction.gameObject.SetActive(false);
+        RetomarCamera(); // <-- Chama a nova lógica
     }
 
     private void FecharTela()
@@ -87,5 +68,52 @@ public class CookingUI : MonoBehaviour
         }
         painelCozinha.SetActive(false);
         doughInteraction.gameObject.SetActive(false);
+        RetomarCamera(); // <-- Chama a nova lógica
+    }
+
+    // ==========================================
+    // Lógica de Câmera e Movimento (Atualizada)
+    // ==========================================
+
+    private void SoltarCamera()
+    {
+        // 1. Solta a câmera do Cinemachine (Nome novo: CinemachineCamera)
+        CinemachineCamera vcam = FindObjectOfType<CinemachineCamera>();
+        if (vcam != null)
+        {
+            vcam.Follow = null; 
+        }
+
+        // 2. Impede o player de andar
+        PlayerMove player = FindObjectOfType<PlayerMove>();
+        if (player != null)
+        {
+            player.podeAndar = false; 
+            
+            // 3. Desativa o colisor do player para ele não bloquear os cliques na massa
+            Collider2D colisorPlayer = player.GetComponent<Collider2D>();
+            if (colisorPlayer != null) colisorPlayer.enabled = false;
+        }
+    }
+
+    private void RetomarCamera()
+    {
+        // 1. Devolve a câmera pro player
+        CinemachineCamera vcam = FindObjectOfType<CinemachineCamera>();
+        PlayerMove player = FindObjectOfType<PlayerMove>();
+
+        if (vcam != null && player != null)
+        {
+            vcam.Follow = player.transform;
+        }
+
+        // 2. Libera o movimento e o colisor do player
+        if (player != null)
+        {
+            player.podeAndar = true;
+            
+            Collider2D colisorPlayer = player.GetComponent<Collider2D>();
+            if (colisorPlayer != null) colisorPlayer.enabled = true;
+        }
     }
 }

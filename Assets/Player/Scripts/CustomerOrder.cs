@@ -9,26 +9,32 @@ public class CustomerOrder : MonoBehaviour
 
     private bool orderCreated = false;
 
+    void Start()
+    {
+        if (npc == null)
+            npc = GetComponent<NPCController>();
+    }
+
     public void TryGenerateOrder()
-{
-    if (orderCreated)
-        return;
-
-    CounterZone counter = FindObjectOfType<CounterZone>();
-
-    Debug.Log($"[TRY ORDER] counter = {(counter != null ? "achou" : "NULL")}");
-
-    if (counter != null && counter.playerOnCounter)
     {
-        Debug.Log("[TRY ORDER] player está no balcão, gerando pedido...");
-        GenerateOrder();
-        orderCreated = true;
+        if (orderCreated)
+            return;
+
+        CounterZone counter = FindObjectOfType<CounterZone>();
+
+        Debug.Log($"[TRY ORDER] counter = {(counter != null ? "achou" : "NULL")}");
+
+        if (counter != null && counter.playerOnCounter)
+        {
+            Debug.Log("[TRY ORDER] player está no balcão, gerando pedido...");
+            GenerateOrder();
+            orderCreated = true;
+        }
+        else
+        {
+            Debug.Log($"[TRY ORDER] esperando player. playerOnCounter = {(counter != null ? counter.playerOnCounter.ToString() : "N/A")}");
+        }
     }
-    else
-    {
-        Debug.Log($"[TRY ORDER] esperando player. playerOnCounter = {(counter != null ? counter.playerOnCounter.ToString() : "N/A")}");
-    }
-}
 
     public void GenerateOrder()
     {
@@ -54,7 +60,28 @@ public class CustomerOrder : MonoBehaviour
         if (QueueManager.Instance != null)
             QueueManager.Instance.LeaveQueue(npc);
 
-        npc.currentState = NPCController.NPCState.Leaving;
+        npc.currentState = NPCController.NPCState.WaitingForItem;
+        waitingForItem = true;
+    }
+
+    public void ReceiveItem()
+    {
+        if (!waitingForItem) return;
         waitingForItem = false;
+
+        // Pagamento agora é responsabilidade do PlayerDelivery
+
+        MesaController mesa = TableManager.Instance != null
+            ? TableManager.Instance.EncontrarMesaLivre(npc)
+            : null;
+
+        if (mesa != null)
+        {
+            npc.IrParaMesa(mesa);
+        }
+        else
+        {
+            npc.currentState = NPCController.NPCState.Leaving;
+        }
     }
 }

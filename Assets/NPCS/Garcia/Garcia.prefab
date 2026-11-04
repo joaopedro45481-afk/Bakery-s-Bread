@@ -1,5 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3804195400359291695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4637988317141237305}
+  - component: {fileID: 4233001762304718828}
+  - component: {fileID: 6835700022344619063}
+  m_Layer: 0
+  m_Name: IteractionZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4637988317141237305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804195400359291695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2252509413737162459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &4233001762304718828
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804195400359291695}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.04}
+  m_Radius: 1.29
+--- !u!114 &6835700022344619063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804195400359291695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0c27c694b75b8842b2e53d3db7cf6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NPCInteractionZone
+  npc: {fileID: 0}
+  playerPerto: 0
 --- !u!1001 &6642162582664008503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 2117729134368396075, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
       propertyPath: npc
       value: 
-      objectReference: {fileID: 4513878894925405975}
+      objectReference: {fileID: 2132821416857015132}
     - target: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
       propertyPath: m_Name
       value: Garcia
@@ -102,39 +185,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1685984115302509387, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+    - {fileID: 5697881561734762317, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 3265735136857757467, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4513878894925405975}
+      addedObject: {fileID: 4637988317141237305}
+    m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2132821416857015132}
   m_SourcePrefab: {fileID: 100100000, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+--- !u!4 &2252509413737162459 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4859162780325033452, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
+  m_PrefabInstance: {fileID: 6642162582664008503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8745801950882958855 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2698473269062294832, guid: e7a17af7406f30e4091e16b936ca8951, type: 3}
   m_PrefabInstance: {fileID: 6642162582664008503}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4513878894925405975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8745801950882958855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b00b93731d63e554297a0baa5cf8e136, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCController
-  entranceWaypoints: []
-  exitWaypoints: []
-  speed: 2
-  waypointThreshold: 0.05
-  useDirectionalAnimations: 1
-  currentState: 0
 --- !u!114 &2132821416857015132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,4 +224,5 @@ MonoBehaviour:
   speed: 2
   waypointThreshold: 0.05
   useDirectionalAnimations: 1
+  tempoDeComer: 10
   currentState: 0

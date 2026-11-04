@@ -126,4 +126,20 @@ public bool RemoveItem(int itemID)
         }
         return InvData;
     }
+    
+        public bool HasItem(int itemID)
+    {
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+
+            if (slot.currentItem != null)
+            {
+                Item item = slot.currentItem.GetComponent<Item>();
+                if (item.ID == itemID)
+                    return true;
+            }
+        }
+        return false;
+    }
 }

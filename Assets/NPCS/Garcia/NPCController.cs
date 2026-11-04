@@ -1,11 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    [Header("Waypoints")]
-    public Transform[] entranceWaypoints;
-    public Transform[] exitWaypoints;
-
     [Header("Movement")]
     public float speed = 2f;
     public float waypointThreshold = 0.05f;
@@ -13,8 +10,10 @@ public class NPCController : MonoBehaviour
     [Header("Animation")]
     public bool useDirectionalAnimations = true;
 
-    private int currentWaypoint = 0;
-    private int exitIndex = 0;
+    [Header("Grafo de Waypoints")]
+    public Waypoint waypointInicial; // se null, usa o isEntrada
+    public Waypoint waypointBalcao;  // se null, usa o isBalcao
+    public Waypoint waypointSaida;   // se null, usa o isSaida
 
     private Transform queueTarget;
 
@@ -25,6 +24,10 @@ public class NPCController : MonoBehaviour
 
     // Trava de segurança pra não reentrar no EnterQueue
     private bool enteredQueue = false;
+
+    // Navegação pelo grafo
+    private List<Waypoint> rotaAtual = new List<Waypoint>();
+    private int indiceRota = 0;
 
     private Vector2 lastDirection = Vector2.down;
 
@@ -42,6 +45,24 @@ public class NPCController : MonoBehaviour
         customerOrder = GetComponent<CustomerOrder>();
         animator = GetComponentInChildren<Animator>();
 
+        // Resolve waypoints se não foram setados no Inspector
+        if (waypointInicial == null)
+            waypointInicial = NPCPathfinder.EncontrarWaypoint(entrada: true);
+        if (waypointBalcao == null)
+            waypointBalcao = NPCPathfinder.EncontrarWaypoint(balcao: true);
+        if (waypointSaida == null)
+            waypointSaida = NPCPathfinder.EncontrarWaypoint(saida: true);
+
+        // Posiciona o NPC no waypoint de entrada
+        if (waypointInicial != null)
+            transform.position = waypointInicial.transform.position;
+
+        // Calcula rota até o balcão
+        Debug.Log($"[NPC] entrada={(waypointInicial != null ? waypointInicial.name : "NULL")} " +
+          $"balcao={(waypointBalcao != null ? waypointBalcao.name : "NULL")} " +
+          $"saida={(waypointSaida != null ? waypointSaida.name : "NULL")}");
+        IniciarRota(waypointInicial, waypointBalcao, NPCState.WalkingToCounter);
+
         UpdateDirection(Vector2.zero);
         UpdateAnimation(false);
     }
@@ -51,11 +72,10 @@ public class NPCController : MonoBehaviour
         switch (currentState)
         {
             case NPCState.WalkingToCounter:
-                WalkToCounter();
+                SeguirRota(WalkingToCounter_Chegou);
                 break;
 
             case NPCState.WaitingAtCounter:
-                // Anda até o slot da fila. Se não tem alvo, fica parado.
                 if (queueTarget != null)
                     MoveTowardsTarget(queueTarget.position);
                 else
@@ -63,9 +83,7 @@ public class NPCController : MonoBehaviour
                 break;
 
             case NPCState.WaitingForPlayer:
-                // Primeiro da fila: parado, esperando atendimento.
                 UpdateAnimation(false);
-
                 if (customerOrder != null)
                     customerOrder.TryGenerateOrder();
                 break;
@@ -75,99 +93,112 @@ public class NPCController : MonoBehaviour
                 break;
 
             case NPCState.WalkingToTable:
-                UpdateAnimation(false);
+                if (mesaAtual == null) { UpdateAnimation(false); break; }
+                Transform assento = mesaAtual.GetAssentoLivre();
+                if (assento == null) { UpdateAnimation(false); break; }
+                MoveTowardsTarget(assento.position);
+                if (Vector2.Distance(transform.position, assento.position) < waypointThreshold)
+                {
+                    currentState = NPCState.Eating;
+                    UpdateAnimation(false);
+                }
                 break;
 
             case NPCState.Eating:
                 UpdateAnimation(false);
+                tempoComendo += Time.deltaTime;
+                if (tempoComendo >= tempoDeComer)
+                {
+                    tempoComendo = 0f;
+                    if (mesaAtual != null)
+                    {
+                        mesaAtual.Liberar();
+                        mesaAtual = null;
+                    }
+                    IniciarRota(NPCPathfinder.EncontrarMaisProximo(transform.position), waypointSaida, NPCState.Leaving);
+                }
                 break;
 
             case NPCState.Leaving:
-                LeaveShop();
+                SeguirRota(SaindoDaCena);
                 break;
         }
     }
 
-    void WalkToCounter()
+    // ============ Navegação por grafo ============
+
+    void IniciarRota(Waypoint origem, Waypoint destino, NPCState estadoFinal)
     {
-        // Trava de segurança: se já entrou na fila, não faz nada
-        if (enteredQueue)
-            return;
+        rotaAtual = NPCPathfinder.CalcularRota(origem, destino);
+        indiceRota = 0;
+        currentState = estadoFinal;
 
-        if (currentWaypoint >= entranceWaypoints.Length)
+        if (rotaAtual == null || rotaAtual.Count == 0)
         {
-            enteredQueue = true;
-            UpdateAnimation(false);
-
-            if (QueueManager.Instance == null)
-            {
-                Debug.LogError("QueueManager.Instance é NULL!");
-                return;
-            }
-
-            // Muda o estado ANTES do EnterQueue, pra o QueueManager
-            // conseguir atuar via SetAsQueueFirst / SetAsQueueWaiting
-            currentState = NPCState.WaitingAtCounter;
-
-            QueueManager.Instance.EnterQueue(this);
-
-            Debug.Log("Cliente chegou ao balcão!");
-            return;
-        }
-
-        Transform target = entranceWaypoints[currentWaypoint];
-
-        if (target == null)
-        {
-            UpdateAnimation(false);
-            currentWaypoint++;
-            return;
-        }
-
-        MoveTowardsTarget(target.position);
-
-        if (Vector2.Distance(transform.position, target.position)
-            < waypointThreshold)
-        {
-            currentWaypoint++;
+            // Já está no destino ou não tem rota
+            if (estadoFinal == NPCState.WalkingToCounter)
+                WalkingToCounter_Chegou();
+            else if (estadoFinal == NPCState.Leaving)
+                SaindoDaCena();
         }
     }
 
-    void LeaveShop()
+    void SeguirRota(System.Action aoChegarNoDestino)
     {
-        if (exitIndex >= exitWaypoints.Length)
+        if (rotaAtual == null || indiceRota >= rotaAtual.Count)
         {
             UpdateAnimation(false);
-
-            if (NPCSpawner.Instance != null)
-                NPCSpawner.Instance.RemoveNPC(gameObject);
-
-            Destroy(gameObject);
+            aoChegarNoDestino?.Invoke();
             return;
         }
 
-        Transform target = exitWaypoints[exitIndex];
+        Waypoint alvo = rotaAtual[indiceRota];
+        MoveTowardsTarget(alvo.transform.position);
 
-        if (target == null)
+        if (Vector2.Distance(transform.position, alvo.transform.position) < waypointThreshold)
         {
-            UpdateAnimation(false);
-            exitIndex++;
-            return;
-        }
-
-        MoveTowardsTarget(target.position);
-
-        if (Vector2.Distance(transform.position, target.position)
-            < waypointThreshold)
-        {
-            exitIndex++;
+            indiceRota++;
         }
     }
+
+    void WalkingToCounter_Chegou()
+    {
+        if (enteredQueue) return;
+        enteredQueue = true;
+        UpdateAnimation(false);
+
+        if (QueueManager.Instance == null)
+        {
+            Debug.LogError("QueueManager.Instance é NULL!");
+            return;
+        }
+
+        currentState = NPCState.WaitingAtCounter;
+        QueueManager.Instance.EnterQueue(this);
+        Debug.Log("Cliente chegou ao balcão!");
+    }
+
+    void SaindoDaCena()
+    {
+        UpdateAnimation(false);
+
+        if (mesaAtual != null)
+        {
+            mesaAtual.Liberar();
+            mesaAtual = null;
+        }
+
+        if (NPCSpawner.Instance != null)
+            NPCSpawner.Instance.RemoveNPC(gameObject);
+
+        Destroy(gameObject);
+    }
+
+    // ============ Movimento ============
 
     void MoveTowardsTarget(Vector3 targetPosition)
     {
-        Vector2 difference = (Vector2)targetPosition
-                           - (Vector2)transform.position;
+        Vector2 difference = (Vector2)targetPosition - (Vector2)transform.position;
 
         if (difference.magnitude <= waypointThreshold)
         {
@@ -176,15 +207,10 @@ public class NPCController : MonoBehaviour
         }
 
         Vector2 direction;
-
         if (Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
-        {
             direction = difference.x > 0f ? Vector2.right : Vector2.left;
-        }
         else
-        {
             direction = difference.y > 0f ? Vector2.up : Vector2.down;
-        }
 
         UpdateDirection(direction);
         UpdateAnimation(true);
@@ -199,11 +225,8 @@ public class NPCController : MonoBehaviour
     void UpdateDirection(Vector2 direction)
     {
         if (direction == Vector2.zero) return;
-
         lastDirection = direction;
-
         if (animator == null || !useDirectionalAnimations) return;
-
         animator.SetFloat(MoveXHash, lastDirection.x);
         animator.SetFloat(MoveYHash, lastDirection.y);
     }
@@ -212,39 +235,37 @@ public class NPCController : MonoBehaviour
     {
         if (animator == null) return;
         if (isWalking == walking) return;
-
         isWalking = walking;
         animator.SetBool(IsWalkingHash, walking);
     }
 
     // ============ API chamada pelo QueueManager ============
 
-    public void SetQueueTarget(Transform target)
-    {
-        queueTarget = target;
-    }
+    public void SetQueueTarget(Transform target) => queueTarget = target;
 
-    /// <summary>Sou o primeiro da fila → espero o player.</summary>
     public void SetAsQueueFirst()
     {
-        if (currentState == NPCState.WaitingAtCounter
-            || currentState == NPCState.WaitingForPlayer)
-        {
+        if (currentState == NPCState.WaitingAtCounter || currentState == NPCState.WaitingForPlayer)
             currentState = NPCState.WaitingForPlayer;
-        }
     }
 
-    /// <summary>Não sou o primeiro → ando até meu slot.</summary>
     public void SetAsQueueWaiting()
     {
-        if (currentState == NPCState.WaitingAtCounter
-            || currentState == NPCState.WaitingForPlayer)
-        {
+        if (currentState == NPCState.WaitingAtCounter || currentState == NPCState.WaitingForPlayer)
             currentState = NPCState.WaitingAtCounter;
-        }
     }
 
-    // =======================================================
+    // ============ Mesa ============
+
+    private MesaController mesaAtual;
+    private float tempoComendo = 0f;
+    public float tempoDeComer = 10f;
+
+    public void IrParaMesa(MesaController mesa)
+    {
+        mesaAtual = mesa;
+        currentState = NPCState.WalkingToTable;
+    }
 
     public enum NPCState
     {
